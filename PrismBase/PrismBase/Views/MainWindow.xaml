@@ -1,0 +1,97 @@
+﻿<metro:MetroWindow x:Class="PrismBase.Views.MainWindow"
+                    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:prism="http://prismlibrary.com/"
+                    prism:ViewModelLocator.AutoWireViewModel="True"
+                    xmlns:core="clr-namespace:PrismBase.Core;assembly=PrismBase.Core"
+                    xmlns:metro="http://metro.mahapps.com/winfx/xaml/controls"
+                   xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+                   xmlns:dependencyObjects="clr-namespace:PrismBase.Core.DependencyObjects;assembly=PrismBase.Core"
+                   
+                    Background="#FF1C2C39"
+                    ShowIconOnTitleBar="True"
+                    ShowMaxRestoreButton="False"
+                    ShowMinButton="False"
+                    ShowCloseButton="False"
+                    
+                    ResizeMode="CanResizeWithGrip"
+                    NonActiveWindowTitleBrush="LightSlateGray"
+                    
+                    WindowState="Maximized"
+                    MinHeight="900" MinWidth="1735"
+                    Name="MainBar"
+                    
+                    Title="Prism Template"
+                    FontSize="24"
+                    FontWeight="Bold"
+                    >
+    <!-- Left Window Commands -->
+    <metro:MetroWindow.LeftWindowCommands>
+        <metro:WindowCommands prism:RegionManager.RegionName="WindowCommandBarRegionLeft"
+                              SeparatorHeight="0" ShowLastSeparator="False">
+
+            <!-- Home Button-->
+            <metro:Tile Cursor="Hand"
+                        Command="{Binding Path=DataContext.ToHomeCommand, ElementName=MainBar}"
+                        Margin="0,0,10,0" Width="50" Height="20"
+                        Background="Transparent" Foreground="WhiteSmoke"
+                        HorizontalTitleAlignment="Left">
+                <iconPacks:RPGAwesome Width="20" Height="20" Kind="CastleFlag"/>
+
+            </metro:Tile>
+        </metro:WindowCommands>
+    </metro:MetroWindow.LeftWindowCommands>
+
+    <!-- Right Window Commands -->
+    <metro:MetroWindow.RightWindowCommands>
+        <metro:WindowCommands prism:RegionManager.RegionName="WindowCommandBarRegionRight"
+                              SeparatorHeight="0" ShowLastSeparator="False">
+
+            <!-- Settings Button-->
+            <metro:Tile Cursor="Hand"
+                        Command="{Binding Path=DataContext.ToSettingsCommand, ElementName=MainBar}"
+                        Margin="0,0,10,0" Width="50" Height="20"
+                        Background="Transparent" Foreground="WhiteSmoke"
+                        HorizontalTitleAlignment="Right">
+                <iconPacks:PackIconFontAwesome Width="20" Height="20" Kind="CogSolid"
+                                      dependencyObjects:PackIconDependencyObject.Spin=
+                                            "{Binding IsMouseOver, RelativeSource={RelativeSource AncestorType={x:Type metro:Tile}}}"/>
+            </metro:Tile>
+
+            <!-- Minimise Button-->
+            <metro:Tile Cursor="Hand"
+                        Command="{Binding Path=DataContext.WindowCommand, ElementName=MainBar}"
+                        CommandParameter="Minimise"
+                        Margin="0" Width="50" Height="20"
+                        Background="Transparent" Foreground="WhiteSmoke"
+                        HorizontalTitleAlignment="Right">
+                <iconPacks:RPGAwesome Width="20" Height="20" Kind="Overhead"/>
+            </metro:Tile>
+
+            <!-- Resize Button-->
+            <metro:Tile Cursor="Hand"
+                        Command="{Binding Path=DataContext.WindowCommand, ElementName=MainBar}"
+                        CommandParameter="Resize"
+                        Margin="0" Width="50" Height="20"
+                        Background="Transparent" Foreground="WhiteSmoke"
+                        HorizontalTitleAlignment="Right">
+                <iconPacks:RPGAwesome Width="20" Height="20" Kind="XMark"/>
+            </metro:Tile>
+
+            <!-- Close Button-->
+            <metro:Tile Cursor="Hand"
+                        Command="{Binding Path=DataContext.WindowCommand, ElementName=MainBar}"
+                        CommandParameter="Close"
+                        Margin="0" Width="50" Height="20"
+                        Background="Transparent" Foreground="WhiteSmoke"
+                        HorizontalTitleAlignment="Right">
+                <iconPacks:RPGAwesome Width="20" Height="20" Kind="Cancel"/>
+            </metro:Tile>
+
+        </metro:WindowCommands>
+    </metro:MetroWindow.RightWindowCommands>
+
+    <Grid>
+        <ContentControl prism:RegionManager.RegionName="{x:Static core:RegionNames.ContentRegion}" />
+    </Grid>
+</metro:MetroWindow>
