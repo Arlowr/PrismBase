@@ -10,6 +10,7 @@
     <PackageReference Include="Prism.DryIoc" Version="8.1.97" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\PrismBase.Modules.Details\PrismBase.Modules.Details.csproj" />
     <ProjectReference Include="..\PrismBase.Core\PrismBase.Core.csproj" />
     <ProjectReference Include="..\Modules\PrismBase.Modules.ModuleName\PrismBase.Modules.Main.csproj" />
     <ProjectReference Include="..\Services\PrismBase.Services.Interfaces\PrismBase.Services.Interfaces.csproj" />

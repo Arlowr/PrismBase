@@ -1,6 +1,7 @@
 ﻿using Prism.Ioc;
 using Prism.Modularity;
 using PrismBase.Modules.Main;
+using PrismBase.Modules.Details;
 using PrismBase.Services;
 using PrismBase.Services.Interfaces;
 using PrismBase.Views;
@@ -26,6 +27,7 @@ namespace PrismBase
         protected override void ConfigureModuleCatalog(IModuleCatalog moduleCatalog)
         {
             moduleCatalog.AddModule<MainModule>();
+            moduleCatalog.AddModule<DetailsModule>();
         }
     }
 }

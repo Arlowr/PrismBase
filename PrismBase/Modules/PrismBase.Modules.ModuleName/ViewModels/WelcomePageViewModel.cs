@@ -2,6 +2,7 @@
 using Prism.Events;
 using Prism.Mvvm;
 using Prism.Regions;
+using PrismBase.Core;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -25,11 +26,7 @@ namespace PrismBase.Modules.Main.ViewModels
             switch (selectedRPG)
             {
                 case "Main":
-                    //Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-                    //if (!string.IsNullOrEmpty(config.AppSettings.Settings["DatabaseLocation"].Value))
-                    //    PageToGoTo = "CantinaMainView";
-                    //else
-                    //    PageToGoTo = "DataSettingsView";
+                    PageToGoTo = "DetailsMainView";
                     break;
                 case "Settings":
                     PageToGoTo = "DataSettingsView";
@@ -38,7 +35,7 @@ namespace PrismBase.Modules.Main.ViewModels
                     break;
             }
             if (!string.IsNullOrEmpty(PageToGoTo))
-                _regionManager.RequestNavigate("ContentRegion", PageToGoTo);
+                _regionManager.RequestNavigate(RegionNames.ContentRegion, PageToGoTo);
         }
     }
 }
