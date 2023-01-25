@@ -13,6 +13,6 @@ namespace PrismBase.Modules.Details.Models
         public class ClientDBUpdatedEvent : PubSubEvent { }
         public int ClientId { get; set; }
         public List<string> Tags { get; set; }
-        public List<Comments> Comments { get; set; }
+        public List<Note> Notes { get; set; }
     }
 }

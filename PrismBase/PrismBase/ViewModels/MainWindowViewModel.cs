@@ -2,6 +2,7 @@
 using Prism.Events;
 using Prism.Mvvm;
 using Prism.Regions;
+using PrismBase.Core;
 using PrismBase.Core.Generics;
 using System.Configuration;
 using System.Diagnostics;
@@ -42,12 +43,12 @@ namespace PrismBase.ViewModels
 
         private void ToHomeCommandHandler()
         {
-            _regionManager.RequestNavigate("ContentRegion", "WelcomePageView", Callback);
+            _regionManager.RequestNavigate(RegionNames.ContentRegion, "WelcomePageView", Callback);
         }
 
         private void ToSettingsCommandHandler()
         {
-            _regionManager.RequestNavigate("ContentRegion", "DataSettingsView", Callback);
+            _regionManager.RequestNavigate(RegionNames.ContentRegion, "DataSettingsView", Callback);
         }
 
         private void Callback(NavigationResult result)
