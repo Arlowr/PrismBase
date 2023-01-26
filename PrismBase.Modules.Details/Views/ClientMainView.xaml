@@ -10,7 +10,7 @@
         <conv:NegatableBooleanToVisibilityConverter x:Key="VisConverter"/>
         <conv:NegatableBooleanToVisibilityConverter x:Key="NegVisConverter" Negate="True"/>
     </UserControl.Resources>
-    <Grid DataContext="{Binding Client}">
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition/>
@@ -22,19 +22,19 @@
                 <TextBlock Margin="5"
                     Text="Client Name:" FontSize="16"/>
                 <TextBlock Margin="5"
-                    Text="{Binding FullName}" FontSize="16" FontWeight="Bold"/>
+                    Text="{Binding Client.FullName}" FontSize="16" FontWeight="Bold"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <TextBlock Margin="5"
                     Text="Title:" FontSize="16"/>
                 <TextBlock Margin="5"
-                    Text="{Binding Title}" FontSize="16" FontWeight="Bold"/>
+                    Text="{Binding Client.Title}" FontSize="16" FontWeight="Bold"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <TextBlock Margin="5"
                     Text="Address:" FontSize="16"/>
                 <TextBlock Margin="5"
-                    Text="{Binding Address}" FontSize="16" FontWeight="Bold"/>
+                    Text="{Binding Client.Address}" FontSize="16" FontWeight="Bold"/>
             </StackPanel>
         </StackPanel>
         <Grid Grid.Row="1">
@@ -46,7 +46,7 @@
                 <Button HorizontalAlignment="Center" VerticalAlignment="Center"
                     Background="SlateGray" BorderThickness="5" BorderBrush="Gray" Foreground="Black" 
                     Margin="5" Padding="5" MinWidth="100"
-                    Command="{Binding DataContext.NewNoteCommand}">
+                    Command="{Binding NewNoteCommand}">
                     <TextBlock TextWrapping="Wrap" FontSize="16" Foreground="#FFE81F" 
                            Text="New Note"/>
                 </Button>
@@ -58,12 +58,12 @@
                 <Button HorizontalAlignment="Center" VerticalAlignment="Center"
                     Background="SlateGray" BorderThickness="5" BorderBrush="Gray" Foreground="Black" 
                     Margin="5" Padding="5" MinWidth="100"
-                    Command="{Binding DataContext.OpenNoteCommand}">
+                    Command="{Binding OpenNoteCommand}">
                     <TextBlock TextWrapping="Wrap" FontSize="16" Foreground="#FFE81F" 
                            Text="Open Note"/>
                 </Button>
             </StackPanel>
-            <Grid DataContext="{Binding OpenedNote}" Grid.Column="1"
+            <Grid Grid.Column="1"
                   Visibility="{Binding IsNoteOpened, Converter={StaticResource VisConverter}}">
                 <Grid.RowDefinitions>
                     <RowDefinition/>
@@ -78,7 +78,7 @@
                                 Text="Note ID: "/>
                         <TextBlock  Margin="5"
                                 FontSize="16"
-                                Text="{Binding NoteID}"/>
+                                Text="{Binding OpenedNote.NoteID}"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Margin="10">
                         <TextBlock Margin="5" 
@@ -86,7 +86,7 @@
                                 Text="Title: "/>
                         <TextBox  Margin="5" Width="200"
                                 FontSize="16"
-                                Text="{Binding Title}"/>
+                                Text="{Binding OpenedNote.Title}"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Margin="10">
                         <TextBlock Margin="5" 
@@ -94,7 +94,7 @@
                                 Text="Type: "/>
                         <ComboBox  Margin="5" Width="200"
                                 FontSize="16"
-                                ItemsSource="{Binding DataSource.NoteTypes}" SelectedItem="{Binding Type}"/>
+                                ItemsSource="{Binding OpenedNote.NoteTypes}" SelectedItem="{Binding OpenedNote.Type}"/>
                     </StackPanel>
                 </StackPanel>
                 <Button Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center"
