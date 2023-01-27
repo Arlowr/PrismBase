@@ -30,35 +30,6 @@ namespace PrismBase.Modules.Details.ViewModels
             get { return _client; }
             set { SetProperty(ref _client, value); }
         }
-        private Note _selectedNote;
-        public Note SelectedNote
-        {
-            get { return _selectedNote != null ? _selectedNote : new Note(); }
-            set 
-            { 
-                SetProperty(ref _selectedNote, value);
-                if (SelectedNote != null)
-                    OpenNoteCommand.RaiseCanExecuteChanged();
-            }
-        }
-        private Note _openedNote;
-        public Note OpenedNote
-        {
-            get { return _openedNote != null ? _openedNote : new Note(); }
-            set 
-            { 
-                SetProperty(ref _openedNote, value);
-                if (OpenedNote != null)
-                    SaveNoteCommand.RaiseCanExecuteChanged();
-            }
-        }
-
-        private bool _isNoteOpened;
-        public bool IsNoteOpened
-        {
-            get { return _isNoteOpened; }
-            set { SetProperty(ref _isNoteOpened, value); }
-        }
 
         private List<string> _noteTypes;
         public List<string> NoteTypes
@@ -67,53 +38,11 @@ namespace PrismBase.Modules.Details.ViewModels
             set { SetProperty(ref _noteTypes, value); }
         }
 
-        #endregion
-
-        #region Commands
-
-        public DelegateCommand NewNoteCommand { get; private set; }
-        private void OpenNewNote()
+        private string _clientSubViewName;
+        public string ClientSubViewName
         {
-            OpenedNote = new Note() { ClientId = Client.ClientId, NoteID = (Client.Notes.Count() + 1) };
-            IsNoteOpened = true;
-        }
-        public DelegateCommand OpenNoteCommand { get; private set; }
-        private bool CanOpenNote()
-        {
-            if (SelectedNote.Title != null)
-                return true;
-            else
-                return false;
-        }
-        private void OpenNote()
-        {
-            OpenedNote = new Note() 
-            { ClientId = SelectedNote.ClientId
-            , NoteID = SelectedNote.NoteID
-            , Title = SelectedNote.Title
-            , Text= SelectedNote.Text
-            , Type= SelectedNote.Type
-            };
-            IsNoteOpened = true;
-        }
-
-        public DelegateCommand SaveNoteCommand { get; private set; }
-        private bool CanSaveNote()
-        {
-            if (OpenedNote.Title != null)
-                return true;
-            else
-                return false;
-        }
-        private void SaveNote()
-        { 
-            if(Client.Notes.Exists(x => x.NoteID == OpenedNote.NoteID && x.ClientId == OpenedNote.ClientId))
-            {
-                Client.Notes.FirstOrDefault(x => x.NoteID == OpenedNote.NoteID && x.ClientId == OpenedNote.ClientId).Title = OpenedNote.Title;
-                Client.Notes.FirstOrDefault(x => x.NoteID == OpenedNote.NoteID && x.ClientId == OpenedNote.ClientId).Text = OpenedNote.Text;
-                Client.Notes.FirstOrDefault(x => x.NoteID == OpenedNote.NoteID && x.ClientId == OpenedNote.ClientId).Type = OpenedNote.Type;
-                _eventAggregator.GetEvent<ClientUpdatedEvent>().Publish(Client);
-            }
+            get { return _clientSubViewName; }
+            set { SetProperty(ref _clientSubViewName, value); }
         }
 
         #endregion
@@ -122,13 +51,8 @@ namespace PrismBase.Modules.Details.ViewModels
         {
             _regionManager = regionManager;
             _eventAggregator = eventAggregator;
-            SaveNoteCommand = new DelegateCommand(SaveNote, CanSaveNote);
-            OpenNoteCommand = new DelegateCommand(OpenNote, CanOpenNote);
-            NewNoteCommand = new DelegateCommand(OpenNewNote);
 
             NoteTypes = new List<string>() { "Misc", "Important", "Update" };
-
-            IsNoteOpened = false;
         }
 
         #region Navigation Controls
@@ -139,6 +63,8 @@ namespace PrismBase.Modules.Details.ViewModels
                 Client = navigationContext.Parameters.GetValue<Client>("Client");
                 TabTitle = Client.ClientId + "." + Client.FirstName.Substring(0, 1) + "." + Client.LastName.Substring(0, 1);
             }
+
+            ClientSubViewName = Client.ClientId + "SubWindow";
         }
         public bool IsNavigationTarget(NavigationContext navigationContext)
         {

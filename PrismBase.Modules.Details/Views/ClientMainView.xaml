@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:prism="http://prismlibrary.com/"             
              prism:ViewModelLocator.AutoWireViewModel="True"
+             xmlns:core="clr-namespace:PrismBase.Core;assembly=PrismBase.Core"
              xmlns:conv="clr-namespace:PrismBase.Core.Converters;assembly=PrismBase.Core"
              MinWidth="800" MinHeight="700"
              Width="1200">
@@ -84,75 +85,8 @@
                     Text="{Binding Client.Address.PostCode, UpdateSourceTrigger=PropertyChanged}" FontSize="16" FontWeight="Bold"/>
         </Grid>
         <Grid Grid.Row="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="2*"/>
-                <ColumnDefinition Width="6*"/>
-            </Grid.ColumnDefinitions>
-            <StackPanel Margin="10" VerticalAlignment="Center">
-                <Button HorizontalAlignment="Center" VerticalAlignment="Center"
-                    Background="SlateGray" BorderThickness="5" BorderBrush="Gray" Foreground="Black" 
-                    Margin="5" Padding="5" MinWidth="100"
-                    Command="{Binding NewNoteCommand}">
-                    <TextBlock TextWrapping="Wrap" FontSize="16" Foreground="#FFE81F" 
-                           Text="New Note"/>
-                </Button>
-                <ListBox MinHeight="150" MaxHeight="250" MinWidth="160"
-                         HorizontalAlignment="Center" VerticalAlignment="Center"
-                         ScrollViewer.VerticalScrollBarVisibility="Auto"
-                        ItemsSource="{Binding Client.Notes, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedNote}"
-                         DisplayMemberPath="Title"/>
-                <Button HorizontalAlignment="Center" VerticalAlignment="Center"
-                    Background="SlateGray" BorderThickness="5" BorderBrush="Gray" Foreground="Black" 
-                    Margin="5" Padding="5" MinWidth="100"
-                    Command="{Binding OpenNoteCommand}">
-                    <TextBlock TextWrapping="Wrap" FontSize="16" Foreground="#FFE81F" 
-                           Text="Open Note"/>
-                </Button>
-            </StackPanel>
-            <Grid Grid.Column="1"
-                  Visibility="{Binding IsNoteOpened, Converter={StaticResource VisConverter}}">
-                <Grid.RowDefinitions>
-                    <RowDefinition/>
-                    <RowDefinition Height="3*"/>
-                    <RowDefinition/>
-                </Grid.RowDefinitions>
-                <StackPanel Orientation="Horizontal" Margin="5">
-
-                    <StackPanel Orientation="Horizontal" Margin="10">
-                        <TextBlock Margin="5" 
-                                FontSize="16" VerticalAlignment="Center"
-                                Text="Note ID: "/>
-                        <TextBlock  Margin="5"
-                                FontSize="16" VerticalAlignment="Center"
-                                Text="{Binding OpenedNote.NoteID, UpdateSourceTrigger=PropertyChanged}"/>
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal" Margin="10">
-                        <TextBlock Margin="5" 
-                                FontSize="16" VerticalAlignment="Center"
-                                Text="Title: "/>
-                        <TextBox  Margin="5" Width="200"
-                                FontSize="16" VerticalAlignment="Center"
-                                Text="{Binding OpenedNote.Title, UpdateSourceTrigger=PropertyChanged}"/>
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal" Margin="10">
-                        <TextBlock Margin="5" 
-                                FontSize="16" VerticalAlignment="Center"
-                                Text="Type: "/>
-                        <ComboBox  Margin="5" Width="200"
-                                FontSize="16" VerticalAlignment="Center"
-                                ItemsSource="{Binding NoteTypes}" SelectedItem="{Binding OpenedNote.Type, UpdateSourceTrigger=PropertyChanged}"/>
-                    </StackPanel>
-                </StackPanel>
-                <TextBox Grid.Row="1" Margin="10" Width="400" 
-                         Text="{Binding OpenedNote.Text, UpdateSourceTrigger=PropertyChanged}"/>
-                <Button Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center"
-                    Background="SlateGray" BorderThickness="5" BorderBrush="Gray" Foreground="Black" 
-                    Margin="5" Padding="5" MinWidth="100"
-                    Command="{Binding SaveNoteCommand}">
-                    <TextBlock TextWrapping="Wrap" FontSize="16" Foreground="#FFE81F" 
-                           Text="Save Note"/>
-                </Button>
-            </Grid>
+            <TabControl BorderBrush="SandyBrown" Background="Transparent"
+                         prism:RegionManager.RegionName="{Binding ClientSubViewName}"/>
         </Grid>
     </Grid>
 </UserControl>
