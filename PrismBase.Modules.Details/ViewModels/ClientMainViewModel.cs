@@ -130,12 +130,14 @@ namespace PrismBase.Modules.Details.ViewModels
 
             IsNoteOpened = false;
         }
+
+        #region Navigation Controls
         public void OnNavigatedTo(NavigationContext navigationContext)
         {
             if (navigationContext.Parameters.ContainsKey("Client"))
             {
                 Client = navigationContext.Parameters.GetValue<Client>("Client");
-                TabTitle = Client.ClientId + "." + Client.FirstName.Substring(0,1) + "." + Client.LastName.Substring(0, 1);
+                TabTitle = Client.ClientId + "." + Client.FirstName.Substring(0, 1) + "." + Client.LastName.Substring(0, 1);
             }
         }
         public bool IsNavigationTarget(NavigationContext navigationContext)
@@ -153,5 +155,7 @@ namespace PrismBase.Modules.Details.ViewModels
                 return true;
         }
         public void OnNavigatedFrom(NavigationContext navigationContext) { }
+
+        #endregion
     }
 }

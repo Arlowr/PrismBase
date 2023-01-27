@@ -89,8 +89,9 @@ namespace PrismBase.Modules.Details.ViewModels
                 WindowType = "ClientMainView";
             else if (PersonType == "Worker")
                 WindowType = "WorkerMainView";
-            _regionManager.RequestNavigate(RegionNames.DetailsMainRegion, WindowType, navParams);
 
+            // Adds the new 'UserControl' (window) to be displayed in the DetailsMainRegion
+            _regionManager.RequestNavigate(RegionNames.DetailsMainRegion, WindowType, navParams);
         }
 
         #endregion

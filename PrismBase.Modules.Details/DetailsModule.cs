@@ -14,8 +14,10 @@ namespace PrismBase.Modules.Details
 
         public void RegisterTypes(IContainerRegistry containerRegistry)
         {
+            // Important for enabling views to be displayed
             containerRegistry.RegisterForNavigation<DetailsMainView>();
             containerRegistry.RegisterForNavigation<ClientMainView>();
+            containerRegistry.RegisterForNavigation<WorkerMainView>();
 
         }
     }
