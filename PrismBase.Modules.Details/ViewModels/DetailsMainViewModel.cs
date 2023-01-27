@@ -7,6 +7,7 @@ using PrismBase.Modules.Details.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Windows;
 using static PrismBase.Modules.Details.Models.Client;
 
@@ -101,7 +102,19 @@ namespace PrismBase.Modules.Details.ViewModels
             _eventAggregator.GetEvent<ClientUpdatedEvent>().Subscribe((Client) =>
             {
                 if (this.AllClients.Exists(x => x.ClientId == Client.ClientId))
-                    this.AllClients.FirstOrDefault(x => x.ClientId == Client.ClientId).Notes = Client.Notes;
+                {
+                    this.AllClients.Where(x => x.ClientId == Client.ClientId).Select(c =>
+                        {
+                            c.Title = Client.Title;
+                            c.Notes = Client.Notes;
+                            c.Address = Client.Address;
+                            c.Description = Client.Description;
+                            c.FirstName = Client.FirstName;
+                            c.LastName = Client.LastName;
+                            c.Tags = Client.Tags;
+                            return c;
+                        });
+                }
 
             });
 
@@ -136,9 +149,9 @@ namespace PrismBase.Modules.Details.ViewModels
         {
             List<Client> clients = new List<Client>();
 
-            clients.Add(new Client() { ClientId = 1, FirstName = "Tim", LastName = "Gibbs", Address = "Somewhere Out There", Description = "Person?" });
-            clients.Add(new Client() { ClientId = 2, FirstName = "Jerry", LastName = "Smith", Address = "Smith Household", Description = "Father of Morty, Son-in-law of Rick" });
-            clients.Add(new Client() { ClientId = 3, FirstName = "Morty", LastName = "Smith", Address = "Smith Household", Description = "Doesn't Know What He Is Doing",
+            clients.Add(new Client() { ClientId = 1, FirstName = "Tim", LastName = "Gibbs", Address = new Address() { Line1 = "Somewhere Out There" }, Description = "Person?" });
+            clients.Add(new Client() { ClientId = 2, FirstName = "Jerry", LastName = "Smith", Address = new Address() { Line1 = "Smith Household" }, Description = "Father of Morty, Son-in-law of Rick" });
+            clients.Add(new Client() { ClientId = 3, FirstName = "Morty", LastName = "Smith", Address = new Address() { Line1 = "Smith Household" }, Description = "Doesn't Know What He Is Doing",
                 Notes = new List<Note>() { new Note() { ClientId = 3, NoteID = 1, Title = "Lost In Space", Text="Morty Got Lost in Space, got to find him.", Type = "Misc" },
                 new Note() { ClientId = 3, NoteID = 2, Title = "Investigation has begun", Text="Rick has been sent out to find Morty.", Type= "Update" },
                 new Note() { ClientId = 3, NoteID = 3, Title = "Located", Text="Morty has been found.", Type = "Update" } 
@@ -151,10 +164,10 @@ namespace PrismBase.Modules.Details.ViewModels
         {
             List<Worker> workers = new List<Worker>();
 
-            workers.Add(new Worker() { WorkerID = 1, FirstName = "Rick", LastName = "Sanchez", Address = "Smith Household", Department = "Inventing", JobTitle = "Mad Scientist" });
-            workers.Add(new Worker() { WorkerID = 2, FirstName = "Kratos", LastName = "Judge", Address = "Midgard", Department = "Slaying", JobTitle = "God Slayer" });
-            workers.Add(new Worker() { WorkerID = 3, FirstName = "Atreus", LastName = "Judge", Address = "Midgard", Department = "Slaying", JobTitle = "God Slayer Assistant" });
-            workers.Add(new Worker() { WorkerID = 4, FirstName = "Doom", LastName = "Guy", Address = "Hell", Department = "Slaying", JobTitle = "Demon Slayer" });
+            workers.Add(new Worker() { WorkerID = 1, FirstName = "Rick", LastName = "Sanchez", Address = new Address() { Line1 = "Smith Household" }, Department = "Inventing", JobTitle = "Mad Scientist" });
+            workers.Add(new Worker() { WorkerID = 2, FirstName = "Kratos", LastName = "Judge", Address = new Address() { City = "Midgard" }, Department = "Slaying", JobTitle = "God Slayer" });
+            workers.Add(new Worker() { WorkerID = 3, FirstName = "Atreus", LastName = "Judge", Address = new Address() { City = "Midgard" }, Department = "Slaying", JobTitle = "God Slayer Assistant" });
+            workers.Add(new Worker() { WorkerID = 4, FirstName = "Doom", LastName = "Guy", Address = new Address() { City = "Hell" }, Department = "Slaying", JobTitle = "Demon Slayer" });
 
             AllWorkers = workers;
         }

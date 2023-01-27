@@ -17,26 +17,72 @@
         </Grid.RowDefinitions>
         <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top"
                 Text="Client Details" FontSize="20"/>
-        <StackPanel Margin="10" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <StackPanel Orientation="Horizontal">
-                <TextBlock Margin="5"
-                    Text="Client Name:" FontSize="16"/>
-                <TextBlock Margin="5"
-                    Text="{Binding Client.FullName}" FontSize="16" FontWeight="Bold"/>
+        <Grid Margin="10" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="150"/>
+                <ColumnDefinition Width="500"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="1">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Margin="5" Width="50"
+                    Text="Title" FontSize="16" FontStyle="Italic"/>
+                    <TextBlock Margin="5" Width="200"
+                    Text="First Name" FontSize="16" FontStyle="Italic"/>
+                    <TextBlock Margin="5" Width="200"
+                    Text="Last Name" FontSize="16" FontStyle="Italic"/>
+                </StackPanel>
             </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <TextBlock Margin="5"
-                    Text="Title:" FontSize="16"/>
-                <TextBlock Margin="5"
-                    Text="{Binding Client.Title}" FontSize="16" FontWeight="Bold"/>
+            <TextBlock Margin="5" Width="100" Grid.Row="1" Grid.Column="0"
+                    Text="Client Name:" FontSize="16" FontWeight="Bold"/>
+            <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left">
+                <TextBox Margin="5" Width="50"
+                    Text="{Binding Client.Title, UpdateSourceTrigger=PropertyChanged}" FontSize="16" FontWeight="Bold"/>
+                <TextBox Margin="5" Width="200"
+                    Text="{Binding Client.FirstName, UpdateSourceTrigger=PropertyChanged}" FontSize="16" FontWeight="Bold"/>
+                <TextBox Margin="5" Width="200"
+                    Text="{Binding Client.LastName, UpdateSourceTrigger=PropertyChanged}" FontSize="16" FontWeight="Bold"/>
             </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <TextBlock Margin="5"
-                    Text="Address:" FontSize="16"/>
-                <TextBlock Margin="5"
-                    Text="{Binding Client.Address}" FontSize="16" FontWeight="Bold"/>
+            <StackPanel Orientation="Horizontal" Grid.Row="2">
+                <TextBlock Margin="5" Grid.Row="2" Grid.Column="0" FontWeight="Bold"
+                    Text="Address" FontSize="16"/>
+                <TextBlock Margin="5" Grid.Row="2" Grid.Column="0" FontStyle="Italic"
+                    Text="(Line 1)" FontSize="16"/>
+                <TextBlock Margin="5" Grid.Row="2" Grid.Column="0" FontWeight="Bold"
+                    Text=":" FontSize="16"/>
             </StackPanel>
-        </StackPanel>
+            <TextBox Margin="5" Width="470" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left"
+                    Text="{Binding Client.Address.Line1, UpdateSourceTrigger=PropertyChanged}" FontSize="16" FontWeight="Bold"/>
+            <TextBlock Margin="5" Grid.Row="3" Grid.Column="0" FontStyle="Italic"
+                    Text="(Line 2)" FontSize="16"/>
+            <TextBox Margin="5" Width="470" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left"
+                    Text="{Binding Client.Address.Line2, UpdateSourceTrigger=PropertyChanged}" FontSize="16" FontWeight="Bold"/>
+            <TextBlock Margin="5" Grid.Row="4" Grid.Column="0" FontStyle="Italic"
+                    Text="(Line 3)" FontSize="16"/>
+            <TextBox Margin="5" Width="470" Grid.Row="4" Grid.Column="1" HorizontalAlignment="Left"
+                    Text="{Binding Client.Address.Line3, UpdateSourceTrigger=PropertyChanged}" FontSize="16" FontWeight="Bold"/>
+            <TextBlock Margin="5" Grid.Row="5" Grid.Column="0" FontStyle="Italic"
+                    Text="City" FontSize="16"/>
+            <TextBox Margin="5" Width="470" Grid.Row="5" Grid.Column="1" HorizontalAlignment="Left"
+                    Text="{Binding Client.Address.City, UpdateSourceTrigger=PropertyChanged}" FontSize="16" FontWeight="Bold"/>
+            <TextBlock Margin="5" Grid.Row="6" Grid.Column="0" FontStyle="Italic"
+                    Text="County" FontSize="16"/>
+            <TextBox Margin="5" Width="470" Grid.Row="6" Grid.Column="1" HorizontalAlignment="Left"
+                    Text="{Binding Client.Address.County, UpdateSourceTrigger=PropertyChanged}" FontSize="16" FontWeight="Bold"/>
+            <TextBlock Margin="5" Grid.Row="7" Grid.Column="0" FontStyle="Italic"
+                    Text="PostCode" FontSize="16"/>
+            <TextBox Margin="5" Width="470" Grid.Row="7" Grid.Column="1" HorizontalAlignment="Left"
+                    Text="{Binding Client.Address.PostCode, UpdateSourceTrigger=PropertyChanged}" FontSize="16" FontWeight="Bold"/>
+        </Grid>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="2*"/>
@@ -53,7 +99,7 @@
                 <ListBox MinHeight="150" MaxHeight="250" MinWidth="160"
                          HorizontalAlignment="Center" VerticalAlignment="Center"
                          ScrollViewer.VerticalScrollBarVisibility="Auto"
-                        ItemsSource="{Binding Notes, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedNote}"
+                        ItemsSource="{Binding Client.Notes, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedNote}"
                          DisplayMemberPath="Title"/>
                 <Button HorizontalAlignment="Center" VerticalAlignment="Center"
                     Background="SlateGray" BorderThickness="5" BorderBrush="Gray" Foreground="Black" 
@@ -74,29 +120,31 @@
 
                     <StackPanel Orientation="Horizontal" Margin="10">
                         <TextBlock Margin="5" 
-                                FontSize="16"
+                                FontSize="16" VerticalAlignment="Center"
                                 Text="Note ID: "/>
                         <TextBlock  Margin="5"
-                                FontSize="16"
-                                Text="{Binding OpenedNote.NoteID}"/>
+                                FontSize="16" VerticalAlignment="Center"
+                                Text="{Binding OpenedNote.NoteID, UpdateSourceTrigger=PropertyChanged}"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Margin="10">
                         <TextBlock Margin="5" 
-                                FontSize="16"
+                                FontSize="16" VerticalAlignment="Center"
                                 Text="Title: "/>
                         <TextBox  Margin="5" Width="200"
-                                FontSize="16"
-                                Text="{Binding OpenedNote.Title}"/>
+                                FontSize="16" VerticalAlignment="Center"
+                                Text="{Binding OpenedNote.Title, UpdateSourceTrigger=PropertyChanged}"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Margin="10">
                         <TextBlock Margin="5" 
-                                FontSize="16"
+                                FontSize="16" VerticalAlignment="Center"
                                 Text="Type: "/>
                         <ComboBox  Margin="5" Width="200"
-                                FontSize="16"
-                                ItemsSource="{Binding OpenedNote.NoteTypes}" SelectedItem="{Binding OpenedNote.Type}"/>
+                                FontSize="16" VerticalAlignment="Center"
+                                ItemsSource="{Binding NoteTypes}" SelectedItem="{Binding OpenedNote.Type, UpdateSourceTrigger=PropertyChanged}"/>
                     </StackPanel>
                 </StackPanel>
+                <TextBox Grid.Row="1" Margin="10" Width="400" 
+                         Text="{Binding OpenedNote.Text, UpdateSourceTrigger=PropertyChanged}"/>
                 <Button Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center"
                     Background="SlateGray" BorderThickness="5" BorderBrush="Gray" Foreground="Black" 
                     Margin="5" Padding="5" MinWidth="100"

@@ -14,6 +14,6 @@ namespace PrismBase.Modules.Details.Models
         public string LastName { get; set; }
         public string FullName { get { return FirstName + " " + LastName;}}
         public string Title { get; set; }
-        public string Address { get; set; }
+        public Address Address { get; set; }
     }
 }

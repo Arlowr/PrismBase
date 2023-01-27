@@ -33,14 +33,24 @@ namespace PrismBase.Modules.Details.ViewModels
         private Note _selectedNote;
         public Note SelectedNote
         {
-            get { return _selectedNote; }
-            set { SetProperty(ref _selectedNote, value); }
+            get { return _selectedNote != null ? _selectedNote : new Note(); }
+            set 
+            { 
+                SetProperty(ref _selectedNote, value);
+                if (SelectedNote != null)
+                    OpenNoteCommand.RaiseCanExecuteChanged();
+            }
         }
         private Note _openedNote;
         public Note OpenedNote
         {
-            get { return _openedNote; }
-            set { SetProperty(ref _openedNote, value); }
+            get { return _openedNote != null ? _openedNote : new Note(); }
+            set 
+            { 
+                SetProperty(ref _openedNote, value);
+                if (OpenedNote != null)
+                    SaveNoteCommand.RaiseCanExecuteChanged();
+            }
         }
 
         private bool _isNoteOpened;
@@ -64,7 +74,7 @@ namespace PrismBase.Modules.Details.ViewModels
         public DelegateCommand NewNoteCommand { get; private set; }
         private void OpenNewNote()
         {
-            OpenedNote = new Note();
+            OpenedNote = new Note() { ClientId = Client.ClientId, NoteID = (Client.Notes.Count() + 1) };
             IsNoteOpened = true;
         }
         public DelegateCommand OpenNoteCommand { get; private set; }
@@ -111,6 +121,7 @@ namespace PrismBase.Modules.Details.ViewModels
         public ClientMainViewModel(IRegionManager regionManager,IEventAggregator eventAggregator)
         {
             _regionManager = regionManager;
+            _eventAggregator = eventAggregator;
             SaveNoteCommand = new DelegateCommand(SaveNote, CanSaveNote);
             OpenNoteCommand = new DelegateCommand(OpenNote, CanOpenNote);
             NewNoteCommand = new DelegateCommand(OpenNewNote);
