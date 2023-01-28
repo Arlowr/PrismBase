@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace PrismBase.Modules.Details.Views
+namespace PrismBase.Modules.Details.Views.WorkerWindows
 {
     /// <summary>
     /// Interaction logic for WorkerMainView

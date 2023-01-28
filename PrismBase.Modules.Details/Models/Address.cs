@@ -13,7 +13,7 @@ namespace PrismBase.Modules.Details.Models
             string fullAddress = "";
             bool first = true;
 
-            for (int i = 1; i <= 6; i++)
+            for (int i = 1; i <= 7; i++)
             {
                 if (!first)
                 {
@@ -40,7 +40,11 @@ namespace PrismBase.Modules.Details.Models
                 {
                     fullAddress += County;
                 }
-                if (i == 6 && !String.IsNullOrEmpty(PostCode))
+                if (i == 6 && !String.IsNullOrEmpty(Country))
+                {
+                    fullAddress += Country;
+                }
+                if (i == 7 && !String.IsNullOrEmpty(PostCode))
                 {
                     fullAddress += PostCode;
                 }
@@ -53,6 +57,7 @@ namespace PrismBase.Modules.Details.Models
         public string Line3 { get; set; }
         public string City { get; set; }
         public string County { get; set; }
+        public string Country { get; set; }
         public string PostCode { get; set; }
     }
 }

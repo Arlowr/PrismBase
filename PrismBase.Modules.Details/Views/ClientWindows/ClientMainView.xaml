@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="PrismBase.Modules.Details.Views.ClientMainView"
+﻿<UserControl x:Class="PrismBase.Modules.Details.Views.ClientWindows.ClientMainView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:prism="http://prismlibrary.com/"             
@@ -85,7 +85,7 @@
                     Text="{Binding Client.Address.PostCode, UpdateSourceTrigger=PropertyChanged}" FontSize="16" FontWeight="Bold"/>
         </Grid>
         <Grid Grid.Row="1">
-            <TabControl BorderBrush="SandyBrown" Background="Transparent"
+            <ContentControl BorderBrush="SandyBrown" Background="Transparent"
                          prism:RegionManager.RegionName="{Binding ClientSubViewName}"/>
         </Grid>
     </Grid>

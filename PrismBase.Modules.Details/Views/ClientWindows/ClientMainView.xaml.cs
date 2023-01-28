@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace PrismBase.Modules.Details.Views
+namespace PrismBase.Modules.Details.Views.ClientWindows
 {
     /// <summary>
     /// Interaction logic for ClientMainView

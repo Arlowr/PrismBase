@@ -55,7 +55,7 @@
             </Grid.RowDefinitions>
             <StackPanel Margin="10" VerticalAlignment="Center">
                 <TextBlock Margin="5" FontSize="12" Text="People:"/>
-                <ListBox MinHeight="150" MaxHeight="250" MinWidth="160"
+                <ListBox MinHeight="150" MaxHeight="200" MinWidth="200" FontSize="18" FontWeight="Bold"
                          HorizontalAlignment="Center" VerticalAlignment="Center"
                          ScrollViewer.VerticalScrollBarVisibility="Auto"
                         ItemsSource="{Binding People, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedPerson}"/>

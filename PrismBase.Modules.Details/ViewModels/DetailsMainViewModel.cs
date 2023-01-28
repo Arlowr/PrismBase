@@ -121,6 +121,7 @@ namespace PrismBase.Modules.Details.ViewModels
 
             CreateExampleClients();
             CreateExampleWorkers();
+            CreateExampleTasks();
 
             RefreshPeople();
 
@@ -150,14 +151,14 @@ namespace PrismBase.Modules.Details.ViewModels
         {
             List<Client> clients = new List<Client>();
 
-            clients.Add(new Client() { ClientId = 1, FirstName = "Tim", LastName = "Gibbs", Address = new Address() { Line1 = "Somewhere Out There" }, Description = "Person?" });
-            clients.Add(new Client() { ClientId = 2, FirstName = "Jerry", LastName = "Smith", Address = new Address() { Line1 = "Smith Household" }, Description = "Father of Morty, Son-in-law of Rick" });
-            clients.Add(new Client() { ClientId = 3, FirstName = "Morty", LastName = "Smith", Address = new Address() { Line1 = "Smith Household" }, Description = "Doesn't Know What He Is Doing",
-                Notes = new List<Note>() { new Note() { ClientId = 3, NoteID = 1, Title = "Lost In Space", Text="Morty Got Lost in Space, got to find him.", Type = "Misc" },
-                new Note() { ClientId = 3, NoteID = 2, Title = "Investigation has begun", Text="Rick has been sent out to find Morty.", Type= "Update" },
-                new Note() { ClientId = 3, NoteID = 3, Title = "Located", Text="Morty has been found.", Type = "Update" } 
+            clients.Add(new Client() { ClientId = 1, FirstName = "Jerry", LastName = "Smith", Address = new Address() { Line1 = "Smith Household", Country = "America" }, Description = "Father of Morty, Son-in-law of Rick" });
+            clients.Add(new Client() { ClientId = 2, FirstName = "Morty", LastName = "Smith", Address = new Address() { Line1 = "Smith Household", Country = "America" }, Description = "Doesn't Know What He Is Doing",
+                Notes = new List<Note>() {  new Note() { ClientId = 2, NoteID = 1, Title = "Lost In Space", Text="Morty Got Lost in Space, got to find him.", Type = "Misc" },
+                                            new Note() { ClientId = 2, NoteID = 2, Title = "Investigation has begun", Text="Rick has been sent out to find Morty.", Type= "Update" },
+                                            new Note() { ClientId = 2, NoteID = 3, Title = "Located", Text="Morty has been found.", Type = "Update" } 
                 }
             });
+            clients.Add(new Client() { ClientId = 3, FirstName = "Dragon", LastName = "Born", Address = new Address() { Line1 = "Winterhold", Country = "Skyrim" }, Description = "The Dovahkiin" });
 
             AllClients = clients;
         }
@@ -165,12 +166,23 @@ namespace PrismBase.Modules.Details.ViewModels
         {
             List<Worker> workers = new List<Worker>();
 
-            workers.Add(new Worker() { WorkerID = 1, FirstName = "Rick", LastName = "Sanchez", Address = new Address() { Line1 = "Smith Household" }, Department = "Inventing", JobTitle = "Mad Scientist" });
-            workers.Add(new Worker() { WorkerID = 2, FirstName = "Kratos", LastName = "Judge", Address = new Address() { City = "Midgard" }, Department = "Slaying", JobTitle = "God Slayer" });
-            workers.Add(new Worker() { WorkerID = 3, FirstName = "Atreus", LastName = "Judge", Address = new Address() { City = "Midgard" }, Department = "Slaying", JobTitle = "God Slayer Assistant" });
+            workers.Add(new Worker() { WorkerID = 1, FirstName = "Rick", LastName = "Sanchez", Address = new Address() { Line1 = "Smith Household", Country = "America" }, Department = "Inventing", JobTitle = "Mad Scientist" });
+            workers.Add(new Worker() { WorkerID = 2, FirstName = "Kratos", LastName = "Judge", Address = new Address() { Line1 = "The Only Cabin", City = "Wildwoods", Country = "Midgard" }, Department = "Slaying", JobTitle = "God Slayer" });
+            workers.Add(new Worker() { WorkerID = 3, FirstName = "Atreus", LastName = "Judge", Address = new Address() { Line1 = "The Only Cabin", City = "Wildwoods", Country = "Midgard" }, Department = "Slaying", JobTitle = "God Slayer Assistant" });
             workers.Add(new Worker() { WorkerID = 4, FirstName = "Doom", LastName = "Guy", Address = new Address() { City = "Hell" }, Department = "Slaying", JobTitle = "Demon Slayer" });
 
             AllWorkers = workers;
+        }
+        private void CreateExampleTasks()
+        {
+            List<Task> tempTasks = new List<Task>();
+
+            tempTasks.Add(new Task() { TaskID = 1, TaskTitle = "Defeat Odin", Description = "Travel the Nine Realms, get sweet magical loot and defeat Odin and Aesir", WorkerIDs = new List<int>() { 2 } });
+            tempTasks.Add(new Task() { TaskID = 2, TaskTitle = "Do Research", Description = "Do research into portal tech.", WorkerIDs = new List<int>() { 1 } });
+            tempTasks.Add(new Task() { TaskID = 3, TaskTitle = "Learn the Shout", Description = "Learn to control the magical power of the shout", WorkerIDs = new List<int>() });
+            tempTasks.Add(new Task() { TaskID = 4, TaskTitle = "Teach Survival", Description = "Teach the Boy to survive in the wilds", WorkerIDs = new List<int>() { 2 } });
+
+            AllTasks.ListOfTasks = tempTasks;
         }
 
         #endregion

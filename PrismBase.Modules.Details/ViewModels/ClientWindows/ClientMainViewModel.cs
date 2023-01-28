@@ -1,5 +1,4 @@
-﻿using Prism.Commands;
-using Prism.Events;
+﻿using Prism.Events;
 using Prism.Mvvm;
 using Prism.Regions;
 using PrismBase.Core;
@@ -7,9 +6,12 @@ using PrismBase.Modules.Details.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using static PrismBase.Modules.Details.Models.Client;
+using System.Net.Sockets;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
 
-namespace PrismBase.Modules.Details.ViewModels
+namespace PrismBase.Modules.Details.ViewModels.ClientWindows
 {
     public class ClientMainViewModel : BindableBase, INavigationAware
     {
@@ -31,13 +33,6 @@ namespace PrismBase.Modules.Details.ViewModels
             set { SetProperty(ref _client, value); }
         }
 
-        private List<string> _noteTypes;
-        public List<string> NoteTypes
-        {
-            get { return _noteTypes; }
-            set { SetProperty(ref _noteTypes, value); }
-        }
-
         private string _clientSubViewName;
         public string ClientSubViewName
         {
@@ -47,12 +42,10 @@ namespace PrismBase.Modules.Details.ViewModels
 
         #endregion
 
-        public ClientMainViewModel(IRegionManager regionManager,IEventAggregator eventAggregator)
+        public ClientMainViewModel(IRegionManager regionManager, IEventAggregator eventAggregator)
         {
             _regionManager = regionManager;
             _eventAggregator = eventAggregator;
-
-            NoteTypes = new List<string>() { "Misc", "Important", "Update" };
         }
 
         #region Navigation Controls
@@ -65,6 +58,10 @@ namespace PrismBase.Modules.Details.ViewModels
             }
 
             ClientSubViewName = Client.ClientId + "SubWindow";
+
+            var navParams = new NavigationParameters();
+            navParams.Add("Client", Client);
+            _regionManager.RequestNavigate(ClientSubViewName, "ClientNotesView", navParams);
         }
         public bool IsNavigationTarget(NavigationContext navigationContext)
         {
