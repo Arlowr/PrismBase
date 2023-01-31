@@ -4,6 +4,7 @@
              xmlns:prism="http://prismlibrary.com/"             
              prism:ViewModelLocator.AutoWireViewModel="True"
              xmlns:conv="clr-namespace:PrismBase.Core.Converters;assembly=PrismBase.Core"
+             xmlns:gen="clr-namespace:PrismBase.Core.Generics;assembly=PrismBase.Core"   
              MinHeight="450" MinWidth="1200"
              Width="1200">
     <UserControl.Resources>
@@ -17,10 +18,10 @@
         </Grid.ColumnDefinitions>
         <StackPanel Margin="10" VerticalAlignment="Center">
             <Button HorizontalAlignment="Center" VerticalAlignment="Center"
-                    Background="SlateGray" BorderThickness="5" BorderBrush="Gray" Foreground="Black" 
+                    Background="{x:Static gen:AppColours.ButtonBackground}" BorderThickness="5" BorderBrush="{x:Static gen:AppColours.ButtonBorder}" Foreground="Black" 
                     Margin="5" Padding="5" MinWidth="100"
                     Command="{Binding NewNoteCommand}">
-                <TextBlock TextWrapping="Wrap" FontSize="16" Foreground="#FFE81F" 
+                <TextBlock TextWrapping="Wrap" FontSize="16" Foreground="{x:Static gen:AppColours.ButtonText}"
                            Text="New Note"/>
             </Button>
             <ListBox MinHeight="150" MaxHeight="250" MinWidth="300"
@@ -30,10 +31,10 @@
                         ItemsSource="{Binding CurrentNotes, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedNote}"
                          DisplayMemberPath="Title"/>
             <Button HorizontalAlignment="Center" VerticalAlignment="Center"
-                    Background="SlateGray" BorderThickness="5" BorderBrush="Gray" Foreground="Black" 
+                    Background="{x:Static gen:AppColours.ButtonBackground}" BorderThickness="5" BorderBrush="{x:Static gen:AppColours.ButtonBorder}" Foreground="Black" 
                     Margin="5" Padding="5" MinWidth="100"
                     Command="{Binding OpenNoteCommand}">
-                <TextBlock TextWrapping="Wrap" FontSize="16" Foreground="#FFE81F" 
+                <TextBlock TextWrapping="Wrap" FontSize="16" Foreground="{x:Static gen:AppColours.ButtonText}"
                            Text="Open Note"/>
             </Button>
         </StackPanel>
@@ -74,10 +75,10 @@
             <TextBox Grid.Row="1" Margin="10" Width="400" TextWrapping="Wrap" FontSize="20"
                          Text="{Binding OpenNoteText, UpdateSourceTrigger=PropertyChanged}"/>
             <Button Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center"
-                    Background="SlateGray" BorderThickness="5" BorderBrush="Gray" Foreground="Black" 
+                    Background="{x:Static gen:AppColours.ButtonBackground}" BorderThickness="5" BorderBrush="{x:Static gen:AppColours.ButtonBorder}" Foreground="Black" 
                     Margin="5" Padding="5" MinWidth="100"
                     Command="{Binding SaveNoteCommand}">
-                <TextBlock TextWrapping="Wrap" FontSize="16" Foreground="#FFE81F" 
+                <TextBlock TextWrapping="Wrap" FontSize="16" Foreground="{x:Static gen:AppColours.ButtonText}"
                            Text="Save Note"/>
             </Button>
         </Grid>

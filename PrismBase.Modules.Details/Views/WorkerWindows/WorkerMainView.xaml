@@ -4,6 +4,7 @@
              xmlns:prism="http://prismlibrary.com/"             
              prism:ViewModelLocator.AutoWireViewModel="True"
              xmlns:conv="clr-namespace:PrismBase.Core.Converters;assembly=PrismBase.Core"
+             xmlns:gen="clr-namespace:PrismBase.Core.Generics;assembly=PrismBase.Core"
              MinWidth="800" MinHeight="700"
              MaxWidth="1200">
     <UserControl.Resources>
@@ -12,7 +13,7 @@
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition MaxHeight="600"/>
+            <RowDefinition MinHeight="580"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
         <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top"
@@ -30,10 +31,10 @@
                 <RowDefinition/>
                 <RowDefinition/>
                 <RowDefinition/>
-                <RowDefinition/>
+                <RowDefinition MinHeight="80"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="150"/>
+                <ColumnDefinition Width="200"/>
                 <ColumnDefinition Width="500"/>
             </Grid.ColumnDefinitions>
             <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="1">
@@ -46,7 +47,7 @@
                     Text="Last Name" FontSize="16" FontStyle="Italic"/>
                 </StackPanel>
             </StackPanel>
-            <TextBlock Margin="5" Width="100" Grid.Row="1" Grid.Column="0"
+            <TextBlock Margin="5" MinWidth="120" Grid.Row="1" Grid.Column="0"
                     Text="Worker Name:" FontSize="16" FontWeight="Bold"/>
             <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left">
                 <TextBox Margin="5" Width="50"
@@ -56,13 +57,13 @@
                 <TextBox Margin="5" Width="200"
                     Text="{Binding Worker.LastName, UpdateSourceTrigger=PropertyChanged}" FontSize="16" FontWeight="Bold"/>
             </StackPanel>
-            <TextBlock Margin="5" Width="100" Grid.Row="2" Grid.Column="0"
+            <TextBlock Margin="5" MinWidth="120" Grid.Row="2" Grid.Column="0"
                     Text="Department:" FontSize="16" FontWeight="Bold"/>
             <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left">
                 <TextBox Margin="5" Width="200"
                     Text="{Binding Worker.Department, UpdateSourceTrigger=PropertyChanged}" FontSize="16" FontWeight="Bold"/>
             </StackPanel>
-            <TextBlock Margin="5" Width="100" Grid.Row="3" Grid.Column="0"
+            <TextBlock Margin="5" MinWidth="120" Grid.Row="3" Grid.Column="0"
                     Text="Job Title:" FontSize="16" FontWeight="Bold"/>
             <StackPanel Orientation="Horizontal" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left">
                 <TextBox Margin="5" Width="200"
@@ -104,10 +105,10 @@
                     Text="{Binding Worker.Address.PostCode, UpdateSourceTrigger=PropertyChanged}" FontSize="16" FontWeight="Bold"/>
 
             <Button HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="11" Grid.ColumnSpan="2"
-                    Background="SlateGray" BorderThickness="5" BorderBrush="Gray" Foreground="Black" 
-                    Margin="5" Padding="5" MinWidth="100"
+                    Background="{x:Static gen:AppColours.ButtonBackground}" BorderThickness="5" BorderBrush="{x:Static gen:AppColours.ButtonBorder}" Foreground="Black" 
+                    Margin="5" Padding="5" MinWidth="100" MinHeight="50"
                     Command="{Binding ShowTasksCommand}">
-                <TextBlock TextWrapping="Wrap" FontSize="16" Foreground="#FFE81F" 
+                <TextBlock TextWrapping="Wrap" FontSize="16" Foreground="{x:Static gen:AppColours.ButtonText}" 
                            Text="ShowTasks"/>
             </Button>
         </Grid>

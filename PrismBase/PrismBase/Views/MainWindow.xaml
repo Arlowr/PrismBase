@@ -4,11 +4,12 @@
                     xmlns:prism="http://prismlibrary.com/"
                     prism:ViewModelLocator.AutoWireViewModel="True"
                     xmlns:core="clr-namespace:PrismBase.Core;assembly=PrismBase.Core"
+                    xmlns:gen="clr-namespace:PrismBase.Core.Generics;assembly=PrismBase.Core"
                     xmlns:metro="http://metro.mahapps.com/winfx/xaml/controls"
                    xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
                    xmlns:dependencyObjects="clr-namespace:PrismBase.Core.DependencyObjects;assembly=PrismBase.Core"
                    
-                    Background="#FF1C2C39"
+                    Background="{x:Static gen:AppColours.Background}"
                     ShowIconOnTitleBar="True"
                     ShowMaxRestoreButton="False"
                     ShowMinButton="False"

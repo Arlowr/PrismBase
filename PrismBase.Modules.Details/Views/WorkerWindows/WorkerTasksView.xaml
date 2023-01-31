@@ -4,6 +4,7 @@
              xmlns:prism="http://prismlibrary.com/"             
              prism:ViewModelLocator.AutoWireViewModel="True"
              xmlns:conv="clr-namespace:PrismBase.Core.Converters;assembly=PrismBase.Core"
+             xmlns:gen="clr-namespace:PrismBase.Core.Generics;assembly=PrismBase.Core"
              MinHeight="500" MaxHeight="600" MinWidth="1200">
     <UserControl.Resources>
         <conv:NegatableBooleanToVisibilityConverter x:Key="VisConverter"/>
@@ -24,10 +25,10 @@
                         ItemsSource="{Binding ShownTasks, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedTask}"
                          DisplayMemberPath="TaskTitle"/>
             <Button HorizontalAlignment="Center" VerticalAlignment="Center"
-                    Background="SlateGray" BorderThickness="5" BorderBrush="Gray" Foreground="Black" 
+                    Background="{x:Static gen:AppColours.ButtonBackground}" BorderThickness="5" BorderBrush="{x:Static gen:AppColours.ButtonBorder}" Foreground="Black" 
                     Margin="5" Padding="5" MinWidth="100"
                     Command="{Binding OpenTaskCommand}">
-                <TextBlock TextWrapping="Wrap" FontSize="16" Foreground="#FFE81F" 
+                <TextBlock TextWrapping="Wrap" FontSize="16" Foreground="{x:Static gen:AppColours.ButtonText}"
                            Text="Open Task"/>
             </Button>
         </StackPanel>
@@ -64,10 +65,10 @@
             <TextBox Grid.Row="1" Margin="10" MinWidth="500" TextWrapping="Wrap" FontSize="20"
                          Text="{Binding OpenTaskDescription, UpdateSourceTrigger=PropertyChanged}"/>
             <Button Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center"
-                    Background="SlateGray" BorderThickness="5" BorderBrush="Gray" Foreground="Black" 
+                    Background="{x:Static gen:AppColours.ButtonBackground}" BorderThickness="5" BorderBrush="{x:Static gen:AppColours.ButtonBorder}" Foreground="Black" 
                     Margin="5" Padding="5" MinWidth="100" Visibility="{Binding UpdatesDone, Converter={StaticResource VisConverter}}"
                     Command="{Binding SaveTaskCommand}">
-                <TextBlock TextWrapping="Wrap" FontSize="16" Foreground="#FFE81F" 
+                <TextBlock TextWrapping="Wrap" FontSize="16" Foreground="{x:Static gen:AppColours.ButtonText}"
                            Text="Save Updates"/>
             </Button>
         </Grid>

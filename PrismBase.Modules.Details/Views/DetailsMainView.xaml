@@ -5,6 +5,7 @@
              xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
              xmlns:core="clr-namespace:PrismBase.Core;assembly=PrismBase.Core"
              xmlns:generics="clr-namespace:PrismBase.Core.Generics;assembly=PrismBase.Core"
+             xmlns:gen="clr-namespace:PrismBase.Core.Generics;assembly=PrismBase.Core"
              xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              prism:ViewModelLocator.AutoWireViewModel="True"
              
@@ -60,16 +61,16 @@
                          ScrollViewer.VerticalScrollBarVisibility="Auto"
                         ItemsSource="{Binding People, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedPerson}"/>
                 <Button HorizontalAlignment="Center" VerticalAlignment="Center"
-                    Background="SlateGray" BorderThickness="5" BorderBrush="Gray" Foreground="Black" 
+                    Background="{x:Static gen:AppColours.ButtonBackground}" BorderThickness="5" BorderBrush="{x:Static gen:AppColours.ButtonBorder}" Foreground="Black" 
                     Margin="5" Padding="5" MinWidth="100"
                     Command="{Binding SelectPersonCommand}">
-                    <TextBlock TextWrapping="Wrap" FontSize="16" Foreground="#FFE81F" 
+                    <TextBlock TextWrapping="Wrap" FontSize="16" Foreground="{x:Static gen:AppColours.ButtonText}"
                            Text="Select Person"/>
                 </Button>
             </StackPanel>
         </Grid>
         <Grid Grid.Column="1">
-            <TabControl BorderBrush="SandyBrown" Background="Transparent"
+            <TabControl BorderBrush="{x:Static gen:AppColours.TabBorder}" Background="Transparent"
                          prism:RegionManager.RegionName="{x:Static core:RegionNames.DetailsMainRegion}"/>
         </Grid>
     </Grid>
